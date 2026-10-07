@@ -1,0 +1,14 @@
+{
+  "id": "support-agent",
+  "title": "Production support agent",
+  "blurb": "Multi-step triage that reads docs, files tickets, and posts to Slack — with traces on every run.",
+  "requirements": {
+    "interface": true,
+    "multiStep": true,
+    "privateData": true,
+    "actions": true,
+    "state": true,
+    "observe": true,
+    "deploy": true
+  }
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Stack Mapper — tick requirements, watch which layers of the AI app stack activate and which tool fills each slot.">
+  <title>Stack Mapper — 8-layer AI app stack lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@400;600;700;800&display=swap&subset=vietnamese">
+  <link rel="stylesheet" href="/styles.css">
+<!-- pb-shell --><link rel="stylesheet" href="./pb-shell.css"><!-- pb-shell --><!-- pb-back --><link rel="stylesheet" href="./pb-back.css"><!-- pb-back --></head>
+<body>
+<a class="skip-link" href="#requirements">Skip to requirements</a>
+<main>
+  <nav aria-label="Primary"><a aria-current="page" href="/">Lab</a><a href="/guide.html">Guide</a><a href="https://github.com/anhquanbd2021/ai-engineering-stack-layers">Source</a></nav>
+  <header class="hero">
+    <div class="hero-text"><p class="eyebrow">Stack Mapper · 8 layers, 8 questions</p><h1>Tick requirements, not tools.</h1><p class="lede">Pick what your AI application actually needs — and watch which layers of the stack light up and which tool fills each slot. A layer activates because a requirement demands it, never because a tutorial listed it.</p></div>
+    <p class="warning"><strong>Safe educational demo.</strong> All mapping runs locally in your browser — nothing is uploaded, no model is called, no code is generated.</p>
+  </header>
+
+  <section class="workspace" aria-label="Requirements">
+    <section class="panel controls" aria-labelledby="req-title">
+      <div><p class="eyebrow">Input</p><h2 id="req-title">What does the app need?</h2></div>
+      <label class="field" for="preset"><span class="field-label">Scenario</span><select id="preset"></select></label>
+      <p id="preset-blurb" class="muted"></p>
+      <div id="requirements" class="toggles" aria-label="Requirement checklist" tabindex="-1"></div>
+      <p class="muted">The model layer is always on — every AI app answers the model question, even by defaulting.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="map-title">
+      <div class="section-heading"><div><p class="eyebrow">Output</p><h2 id="map-title">The layer map</h2></div><span id="score" class="badge" role="status" aria-live="polite">Ready</span></div>
+      <div id="layer-map" class="layer-grid" aria-label="Layer activation map"></div>
+    </section>
+  </section>
+
+  <section class="panel audit-panel" aria-labelledby="audit-title">
+    <div><p class="eyebrow">Layer audit</p><h2 id="audit-title">One line per layer</h2></div>
+    <ul id="audit" class="audit" aria-label="Per-layer audit"></ul>
+  </section>
+
+  <section class="panel loop-strip" aria-label="The mental model">
+    <p class="eyebrow">The mental model that outlives the tools</p>
+    <ol class="loop">
+      <li><strong>Build</strong><span>layers 1–5 assemble the app</span></li>
+      <li><strong>Run</strong><span>deployment makes it reachable</span></li>
+      <li><strong>Observe</strong><span>traces + state expose each run</span></li>
+      <li><strong>Iterate</strong><span>change what observe revealed</span></li>
+      <li><strong>Scale</strong><span>tools swap inside layers — not the map</span></li>
+    </ol>
+  </section>
+
+  <footer class="site-footer"><p><a href="/guide.html">Read the layer guide</a> · <a href="https://github.com/anhquanbd2021/ai-engineering-stack-layers">Inspect source and tests</a></p></footer>
+</main>
+<script type="module" src="/app.js"></script>
+<!-- pb-shell --><a class="pb-shell" href="https://github.com/anhquanbd2021/ai-engineering-stack-layers" title="ai-engineering-stack-layers — an Article Playbook demo (view source)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="9" height="9" rx="2" fill="#2dd4bf"/><rect x="13" y="2" width="9" height="9" rx="2" fill="#2dd4bf" opacity=".45"/><rect x="2" y="13" width="9" height="9" rx="2" fill="#2dd4bf" opacity=".45"/><rect x="13" y="13" width="9" height="9" rx="4.5" fill="#2dd4bf"/></svg><b>ai-engineering-stack-layers</b><i>DEMO</i></a><!-- pb-shell --><!-- pb-back --><a class="pb-back" id="pb-back" href="https://github.com/anhquanbd2021/ai-engineering-stack-layers" title="Back to the article — ai-engineering-stack-layers">← Article <i>PLAYBOOK</i></a><script>(function(){var a=document.getElementById('pb-back');if(!a)return;var h=location.hostname;if(/^(localhost|127\.0\.0\.1|192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(h)){a.href='//'+h+':'+(/^(localhost|127\.0\.0\.1)$/.test(h)?'1234':'30082')+'/microsites/article.html?slug=ai-engineering-stack-layers';}})();</script><!-- pb-back --></body>
+</html>

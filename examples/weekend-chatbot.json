@@ -1,0 +1,6 @@
+{
+  "id": "weekend-chatbot",
+  "title": "Weekend chatbot — prove the value",
+  "blurb": "A prompt plus a model behind a clickable UI. Nothing else exists yet — and that is correct.",
+  "requirements": { "interface": true }
+}

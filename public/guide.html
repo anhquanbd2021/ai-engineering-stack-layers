@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guide to the Stack Mapper demo — what each of the 8 layers is for and the failure you get when a requirement exists but the layer doesn't.">
+  <title>Stack Mapper Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@400;600;700;800&display=swap&subset=vietnamese">
+  <link rel="stylesheet" href="/styles.css">
+<!-- pb-shell --><link rel="stylesheet" href="./pb-shell.css"><!-- pb-shell --><!-- pb-back --><link rel="stylesheet" href="./pb-back.css"><!-- pb-back --></head>
+<body>
+<a class="skip-link" href="#main-start">Skip to content</a>
+<main id="main-start" tabindex="-1">
+  <nav aria-label="Primary"><a href="/">Lab</a><a aria-current="page" href="/guide.html">Guide</a><a href="https://github.com/anhquanbd2021/ai-engineering-stack-layers">Source</a></nav>
+  <header class="hero">
+    <div class="hero-text"><p class="eyebrow">Layer guide</p><h1>8 questions, one tool slot each</h1><p class="lede">The stack is a set of questions, not a parts catalog. Each layer exists to answer exactly one — and each carries a concrete failure when a requirement exists but the layer doesn't.</p></div>
+    <p class="warning"><strong>Opinionated defaults, honest limits.</strong> The tool picks are current answers to each question, not endorsements — tools rotate, the layers don't.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="prove-title">
+    <div><p class="eyebrow">Start here</p><h2 id="prove-title">What this demo proves</h2></div>
+    <p>An empty requirement set lights exactly one layer — the model — because every AI app answers that question even by defaulting. The weekend-chatbot preset activates two of eight layers, and that minimal map is <em>correct</em>, not incomplete. The support-agent preset demands seven; only the full lab activates all eight.</p>
+    <p><a class="try" href="/?example=weekend-chatbot">Open the minimal example</a></p>
+  </section>
+
+  <section class="guide-section" aria-labelledby="runtime-title">
+    <p class="eyebrow">Runtime layers</p>
+    <h2 id="runtime-title">Layers that ship inside the app</h2>
+    <div class="control-grid">
+      <article class="panel control"><span class="control-number">Layer 1</span><h3>Frontend</h3><p>“How does a human touch this?” Prototype UI (Streamlit) and product UI (Next.js) are different answers to the same question.</p><dl><dt>Skip-failure</dt><dd>A script only its author can run — or weeks of UI before anyone validated the feature.</dd></dl></article>
+      <article class="panel control"><span class="control-number">Layer 2</span><h3>Orchestration</h3><p>“Who decides what happens next?” LangGraph for state-machine graphs, CrewAI for role-based crews.</p><dl><dt>Skip-failure</dt><dd><code>if</code>-chains around LLM calls nobody can trace — or a graph runtime carrying a single prompt.</dd></dl></article>
+      <article class="panel control"><span class="control-number">Layer 3</span><h3>Retrieval (RAG)</h3><p>“How does the model learn your data?” Documents → embeddings → vector DB → the most relevant chunks enter the prompt.</p><dl><dt>Skip-failure</dt><dd>Confident fiction — or 40 KB of context re-sent per request.</dd></dl></article>
+      <article class="panel control"><span class="control-number">Layer 4</span><h3>Model (LLM)</h3><p>“Which model does the thinking, on whose hardware?” Ollama + open weights for local control; hosted APIs for capability and zero ops.</p><dl><dt>Skip-failure</dt><dd>The choice made by a tutorial instead of latency, cost, and privacy requirements.</dd></dl></article>
+      <article class="panel control"><span class="control-number">Layer 5</span><h3>Tools (MCP)</h3><p>“How does the model act on the world?” One protocol to GitHub, Slack, databases, and internal APIs.</p><dl><dt>Skip-failure</dt><dd>A read-only advisor humans copy-paste for — or bespoke shims per service.</dd></dl></article>
+      <article class="panel control"><span class="control-number">Layer 7</span><h3>Data + Observability</h3><p>“Where does state live, and can you see inside a run?” SQLite/DuckDB/Supabase for persistence; Phoenix for traces.</p><dl><dt>Skip-failure</dt><dd>Bug reports you cannot reconstruct; a user report as your monitoring channel.</dd></dl></article>
+      <article class="panel control"><span class="control-number">Layer 8</span><h3>Deployment</h3><p>“How does it leave your laptop?” Docker for identical-anywhere packaging; Workers/Hugging Face for light on-ramps.</p><dl><dt>Skip-failure</dt><dd>A demo video instead of a URL — the learning loop never starts.</dd></dl></article>
+    </div>
+  </section>
+
+  <section class="guide-section" aria-labelledby="devtime-title">
+    <p class="eyebrow">Dev-time layer</p>
+    <h2 id="devtime-title">Layer 6 is around the app, not in it</h2>
+    <div class="control-grid">
+      <article class="panel control"><span class="control-number">Layer 6</span><h3>Code Agents</h3><p>“Who writes the code — including this app's?” Claude Code and Aider build the system; they never ship inside it.</p><dl><dt>Skip-failure</dt><dd>A permanently slower loop between “the demo works” and “the system works.”</dd></dl></article>
+    </div>
+  </section>
+
+  <section class="guide-section" aria-labelledby="arch-title">
+    <p class="eyebrow">Architecture</p>
+    <h2 id="arch-title">How the demo is built</h2>
+    <div class="table-wrap panel">
+      <table>
+        <thead><tr><th>Piece</th><th>Behavior</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td>Layer catalog</td><td>The 8 layers: the question each answers, the failure when skipped, today's tool slots.</td><td><code>public/layers.mjs</code></td></tr>
+          <tr><td>Mapper</td><td><code>mapRequirements()</code> lights a layer per satisfied requirement; the model layer is always on. Unknown requirement keys throw.</td><td><code>public/mapper.mjs</code></td></tr>
+          <tr><td>Presets</td><td>Four scenarios embedded in the UI, synced to <code>examples/*.json</code> by test.</td><td><code>public/presets.mjs</code></td></tr>
+          <tr><td>Server</td><td>Zero-dependency static host with an allowlist, plus <code>/health</code> and <code>/version</code>. No build step.</td><td><code>app/server.js</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="guide-section" aria-labelledby="run-title">
+    <p class="eyebrow">Run locally</p>
+    <h2 id="run-title">Inspect the evidence</h2>
+    <pre class="code-block">npm test        # mapper + preset sync + server
+npm run scan    # side-by-side layer report on examples/
+npm run check   # both
+npm start       # serve the lab on :3000</pre>
+    <p>Tick requirements in the lab and watch layers activate — the map you end up with should look exactly as complicated as your requirements.</p>
+  </section>
+
+  <section class="guide-section panel" aria-labelledby="limits-title">
+    <div><p class="eyebrow">Limits</p><h2 id="limits-title">What this demo does not claim</h2></div>
+    <ul class="limit-list">
+      <li>Tool picks are opinionated current defaults, not endorsements — the layer questions are the durable part.</li>
+      <li>The map models <em>which layers exist</em>, not configuration, capacity, or cost.</li>
+      <li>Requirements are binary toggles; real thresholds (QPS, document volume, latency budgets) would shift the same layers' tool picks, not the layer list.</li>
+      <li>A checked requirement proves a layer belongs — it does not prove the tool inside it is the right choice for your constraints.</li>
+    </ul>
+    <p><a class="try" href="/">Return to Lab</a></p>
+  </section>
+</main>
+<!-- pb-shell --><a class="pb-shell" href="https://github.com/anhquanbd2021/ai-engineering-stack-layers" title="ai-engineering-stack-layers — an Article Playbook demo (view source)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="9" height="9" rx="2" fill="#2dd4bf"/><rect x="13" y="2" width="9" height="9" rx="2" fill="#2dd4bf" opacity=".45"/><rect x="2" y="13" width="9" height="9" rx="2" fill="#2dd4bf" opacity=".45"/><rect x="13" y="13" width="9" height="9" rx="4.5" fill="#2dd4bf"/></svg><b>ai-engineering-stack-layers</b><i>DEMO</i></a><!-- pb-shell --><!-- pb-back --><a class="pb-back" id="pb-back" href="https://github.com/anhquanbd2021/ai-engineering-stack-layers" title="Back to the article — ai-engineering-stack-layers">← Article <i>PLAYBOOK</i></a><script>(function(){var a=document.getElementById('pb-back');if(!a)return;var h=location.hostname;if(/^(localhost|127\.0\.0\.1|192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(h)){a.href='//'+h+':'+(/^(localhost|127\.0\.0\.1)$/.test(h)?'1234':'30082')+'/microsites/article.html?slug=ai-engineering-stack-layers';}})();</script><!-- pb-back --></body>
+</html>

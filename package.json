@@ -1,0 +1,16 @@
+{
+  "name": "ai-engineering-stack-layers-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stack Mapper — tick requirements, watch which of the 8 AI-app layers activate and which tool fills each slot.",
+  "scripts": {
+    "start": "node app/server.js",
+    "scan": "node scripts/map-scenarios.mjs",
+    "test": "node --test \"test/*.test.mjs\"",
+    "check": "npm test && npm run scan"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

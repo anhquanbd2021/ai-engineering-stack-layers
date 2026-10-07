@@ -1,0 +1,15 @@
+{
+  "id": "full-lab",
+  "title": "Full lab — every requirement on",
+  "blurb": "All eight requirements ticked: the complete map lights, including the dev-time layer.",
+  "requirements": {
+    "interface": true,
+    "multiStep": true,
+    "privateData": true,
+    "actions": true,
+    "codeAssist": true,
+    "state": true,
+    "observe": true,
+    "deploy": true
+  }
+}

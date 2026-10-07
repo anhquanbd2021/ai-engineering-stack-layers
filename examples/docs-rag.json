@@ -1,0 +1,12 @@
+{
+  "id": "docs-rag",
+  "title": "Docs Q&A over company knowledge",
+  "blurb": "Answers must cite private documents, persist sessions, explain runs, and be reachable.",
+  "requirements": {
+    "interface": true,
+    "privateData": true,
+    "state": true,
+    "observe": true,
+    "deploy": true
+  }
+}
